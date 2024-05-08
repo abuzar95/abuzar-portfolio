@@ -1,0 +1,44 @@
+.swiper-button-prev {
+  color: white; /* Change the color */
+  background-color: transparent; /* Change the background color */
+  border-radius: 50%; /* Make it circular */
+  width: 40px; /* Adjust width */
+  height: 40px; /* Adjust height */
+  border: 1px solid #434445;
+}
+
+.swiper-button-prev:hover {
+  background-color: #00bc91; /* Change background color on hover */
+}
+
+.swiper-button-prev::after {
+  content: "\2190"; /* Unicode arrow character (left arrow) */
+  font-size: 20px; /* Adjust font size */
+  line-height: 40px; /* Center vertically */
+  text-align: center; /* Center horizontally */
+}
+
+.swiper-button-next {
+  color: white; /* Change the color */
+  background-color: transparent; /* Change the background color */
+  border-radius: 50%; /* Make it circular */
+  width: 40px; /* Adjust width */
+  height: 40px; /* Adjust height */
+  border: 1px solid #434445;
+}
+
+.swiper-button-next:hover {
+  background-color: #00bc91; /* Change background color on hover */
+}
+
+.swiper-button-next::after {
+  content: "\2192"; /* Unicode arrow character (right arrow) */
+  font-size: 20px; /* Adjust font size */
+  line-height: 40px; /* Center vertically */
+  text-align: center; /* Center horizontally */
+}
+
+.swiper-pagination {
+  color: #000;
+  font-size: 16px;
+}

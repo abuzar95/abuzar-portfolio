@@ -1,0 +1,41 @@
+@keyframes animate-custom-animation {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: 100%;
+  }
+}
+@keyframes animate-reverse-animation {
+  0% {
+    top: 100%;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+.animate-custom {
+  position: absolute;
+  top: 0;
+  left: -5px !important;
+  width: 10px;
+  height: 10px;
+  background-color: #07c02f; 
+  filter:drop-shadow(0 -2px 5px #07c02f ) ;
+  transform: rotate(45deg);
+  animation: animate-custom-animation 30s linear infinite;
+  animation-duration: calc(var(--isci));
+}
+.animate-reverse {
+  position: absolute;
+  top: 0;
+  left: -5px !important;
+  width: 10px;
+  height: 10px;
+  background-color: #07c02f; 
+  filter:drop-shadow(0 -2px 5px #07c02f ) ;
+  transform: rotate(45deg);
+  animation: animate-reverse-animation 30s linear infinite;
+  animation-duration: calc(var(--isci));
+}
