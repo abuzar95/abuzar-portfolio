@@ -6,7 +6,7 @@ const contactData = [
     value: "Years Of Experience",
   },
   {
-    key: "12",
+    key: "20",
     value: "Handled Projects",
   },
   {

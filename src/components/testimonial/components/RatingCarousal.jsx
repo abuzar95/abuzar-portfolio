@@ -91,7 +91,7 @@ export const RatingCarousal = () => {
           </button>
           <span className="text-white">
             <span className="text-success">{currentIndex + 1}</span>/
-            {testimonials.length}
+            {testimonials.length - 1}
           </span>
           <button
             onClick={goToNextSlide}

@@ -10,7 +10,7 @@ export const SkillsCarousal = ({ direction, parentClick }) => {
     const newSlidePosition =
       direction === "left" ? slidePosition - 240 : slidePosition + 240;
 
-    setSlidePosition(Math.min(Math.max(newSlidePosition, 0), 900));
+    setSlidePosition(Math.min(Math.max(newSlidePosition, 0), 3550));
   };
 
   useEffect(() => {

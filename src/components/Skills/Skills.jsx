@@ -15,8 +15,7 @@ export const Skills = () => {
       <ButtonWithIcon Icon={FaGraduationCap} text={"Skills"} />
       <Heading prefix={"My"} postfix={"Advantages"} />
       <p className="text-md text-primary leading-6 mb-5">
-        I design products that are more than pretty. I make them shippable and
-        usable, tempor non mollit dolor et do aute
+      Unleashing my potential for your success: A showcase of skills and results.
       </p>
       <div className=" absolute w-[50%] right-0">
         <div className="absolute hidden lg:flex  justify-end pr-3 gap-8 items-center w-full top-16">

@@ -6,7 +6,7 @@ import Typed from "typed.js";
 import { useData } from "../DataContext";
 import { AiOutlineCloudDownload } from "react-icons/ai";
 import { FaGithub } from "react-icons/fa6";
-import { FaStackOverflow  } from "react-icons/fa";
+import { FaStackOverflow } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { useMediaQuery } from "react-responsive";
 
@@ -62,7 +62,7 @@ export const ProfileIntroLeftSide = () => {
         // top: divHeight,
         ...(isXLargeScreen ? {} : { top: divHeight }),
       }}
-      className="w-full z-20 rounded-2xl bg-primaryDark flex justify-center items-center p-4 overflow-hidden xl:fixed lg:relative 2lg:relative 3md:relative md:fixed sm:relative xs:relative md:max-w-[21rem] lg:left-[35%] 2lg:left-[35%] 3md:left-[35%] xl:left-0 xl:top-[-47px]"
+      className="w-full z-20 rounded-2xl bg-primaryDark flex justify-center items-center p-4 overflow-hidden xl:fixed lg:relative 2lg:relative 3md:relative md:fixed sm:relative xs:relative md:max-w-[21rem] lg:left-[35%] 2lg:left-[35%] 3md:left-[35%] xl:left-0"
     >
       <div className="absolute z-20 w-[320px] lg:w-[320px] md:w-[320px] sm:w-[100px] xs:w-[100px] xss:w-[100px] h-[100px] xl:-right-[215px] lg:-right-[215px] md:-right-[215px] sm:right-[15px] xs:right-[15px] xss:right-[5px] top-[-50px] bg-[#18191A] overflow-hidden"></div>
 
@@ -91,13 +91,13 @@ export const ProfileIntroLeftSide = () => {
           <h4 className="font-bold">{data?.name}</h4>
           <div id="typed-strings">
             <p>
-              <i>MERN</i> <strong>Developer</strong>
+              <i>Expert</i> <strong>Full-Stack Developer</strong>
             </p>
             <p>
-              <i>Vue</i> <strong>Developer</strong>
+              <i>Versatile</i> <strong>Technical Architect</strong>
             </p>
             <p>
-              <i>Progressive</i> <strong>Applications</strong>
+              <i>Experienced</i> <strong>Software Engineer</strong>
             </p>
             {/* {data?.skills.length > 0 ??
               data?.skills?.map((i) => (
@@ -150,9 +150,13 @@ export const ProfileIntroLeftSide = () => {
                       <FaGithub size={"30px"} />
                     </a>
                   ) : i?.title.toLowerCase() === "stackoverflow" ? (
-                    <FaStackOverflow  size={"30px"} />
+                    <a href={i?.url} target="_blank">
+                      <FaStackOverflow size={"30px"} />
+                    </a>
                   ) : i?.title.toLowerCase() === "linkedin" ? (
-                    <FaLinkedinIn size={"30px"} />
+                    <a href={i?.url} target="_blank">
+                      <FaLinkedinIn size={"30px"} />
+                    </a>
                   ) : (
                     <></>
                   )}

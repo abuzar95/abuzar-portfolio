@@ -28,7 +28,7 @@ export const FeaturedProjects = () => {
           prefix={"Featured"}
           postfix={"Projects"}
           description={
-            "I design products that are more than prettyI make them shippable and usable, ttempor non mollit dolor et do aute"
+            "Here are words from happy clients: their testimonials reflect the quality of my work, customer satisfaction, and the positive impact my services have had on their businesses and projects."
           }
         />
         <div className="w-full mb-4">

@@ -16,7 +16,7 @@ export const ProjectHerosSection = ({data , img}) => {
           }}
         ></div>
       </div>
-      <div className="w-full flex justify-between items-start">
+      <div className="w-full flex justify-between items-start gap-3">
         <div className="w-full flex justify-between items-start flex-col">
           <h2 className="text-white text-[18px] ">Client:</h2>
           <p className="text-primary text-sm">{data?.clientName}</p>

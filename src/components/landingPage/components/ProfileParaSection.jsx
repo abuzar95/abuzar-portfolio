@@ -22,7 +22,7 @@ export const ProfileParaSection = () => {
       id="home"
     >
       <div className="w-full flex justify-between items-center gap-4 mb-9">
-        <div className="w-full xl:w-[50%] flex justify-start items-center">
+        <div className="w-full xl:w-[100%] flex justify-start items-center">
           <div className="w-full flex justify-start items-start flex-col">
             <Heading prefix={"I Craft The"} postfix={"Digital Landscape"} />
             {/* <div className=" w-full flex justify-start items-start flex-col">
@@ -60,11 +60,11 @@ export const ProfileParaSection = () => {
             </button>
           </div>
         </div>
-        <div className="w-[50% ] hidden sm:flex justify-start items-center ">
+        {/* <div className="w-[50% ] hidden sm:flex justify-start items-center ">
           <div className=" w-full flex justify-start items-center">
             <img src={heroImage2} alt="profle" className="max-h-[350px]" />
           </div>
-        </div>
+        </div> */}
       </div>
       <div className=" relative w-full flex mb-5">
         <div className="hidden md:flex flex-col justify-start items-start  w-[17%] border-l-2 border-l-secondary">

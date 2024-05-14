@@ -10,7 +10,7 @@ export const ContactMe = () => {
         prefix={"Contact"}
         postfix={"Me"}
         description={
-          "I design products that are more than pretty. I make them shippable and usable, tempor non mollit dolor et do aute"
+          "Contact me today to learn more about how my full-stack development services can benefit your business."
         }
       />
       <ContactForm />

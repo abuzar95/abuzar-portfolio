@@ -115,6 +115,13 @@ export const CaseStudy = ({ projectData }) => {
         <div className="w-full">
           <Technologies data={newData?.technologies} />
         </div>
+        <div className="w-full flex justify-center items-center mt-5">
+          <a href={newData?.projectLink} target="_blank">
+            <button className="py-2 px-7 bg-[#069c7aff] rounded-full text-white">
+              Visit
+            </button>
+          </a>
+        </div>
       </div>
     </div>
   );

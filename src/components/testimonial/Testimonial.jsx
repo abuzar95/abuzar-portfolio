@@ -11,7 +11,7 @@ export const Testimonial = () => {
         prefix={"What"}
         postfix={"People Say"}
         description={
-          "I design products that are more than pretty. I make them shippable and usable, tempor non mollit dolor et do aute"
+          "Words from happy clients."
         }
       />
       <RatingCarousal />

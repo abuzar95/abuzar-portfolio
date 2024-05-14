@@ -19,8 +19,8 @@ export const ServicesSection = () => {
       <ButtonWithIcon Icon={FaShoppingBag} text={"Services"} />
       <Heading prefix={"My"} postfix={"Services"} />
       <p className="text-md text-primary leading-6 mb-5">
-        I design products that are more than pretty. I make them shippable and
-        usable, tempor non mollit dolor et do aute
+      I can craft both the user-friendly fronts and the brainy backs of websites and apps, ensuring a seamless and engaging user experience. You bring the idea, I'll build it to life.
+
       </p>
       <div className="w-full flex flex-col justify-start  items-start md:flex-row flex-wrap gap-5">
         {data?.services?.slice(0, displayedServices).map((obj, index) => (
