@@ -11,7 +11,7 @@ export const Testimonial = () => {
         prefix={"What"}
         postfix={"People Say"}
         description={
-          "Words from happy clients."
+          "Here are words from happy clients: their testimonials reflect the quality of my work, customer satisfaction, and the positive impact my services have had on their businesses and projects."
         }
       />
       <RatingCarousal />

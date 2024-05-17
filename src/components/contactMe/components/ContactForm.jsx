@@ -21,7 +21,7 @@ export const ContactForm = () => {
           sub={data?.email}
           Icon={AiOutlineMail}
         />
-        <ContactIcons title={"Phone"} sub={"(+92)" + data?.phoneNo} Icon={FiPhoneCall} />
+        <ContactIcons title={"Phone"} sub={"(+92) " + data?.phoneNo} Icon={FiPhoneCall} />
       </div>
       <div className="w-full md:w-[50%]  flex flex-col gap-7 justify-start items-start mb-5">
         <SendMessage />
