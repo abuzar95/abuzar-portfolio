@@ -14,7 +14,7 @@ const instance = axios.create({
 const baseURL =
   process.env.REACT_APP_ENV === "production"
     ? "https://portfolio-api-zeta-seven.vercel.app/api/v1"
-    : "http://localhost:5000/api/v1";
+    : "https://portfolio-api-zeta-seven.vercel.app/api/v1";
     
 export const sendMail = async (data) => {
   try {
