@@ -45,11 +45,7 @@ export const ProfileIntroLeftSide = () => {
   const { data } = useData();
   const baseURL = process.env.REACT_APP_URL;
   const handleDownload = () => {
-    // Replace 'YOUR_GOOGLE_DRIVE_LINK_HERE' with the sharing link of your PDF file
-    const pdfUrl =
-      "https://drive.google.com/file/d/1ilITiB9xi3BhlVysNW20pn-wy1Yo0XST/view?usp=sharing";
-    // Open the PDF in a new tab for the user to download
-    window.open(pdfUrl, "_blank");
+    window.open(data?.devCV, "_blank");
   };
 
   const navigate = useNavigate();
