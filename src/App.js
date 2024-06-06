@@ -40,7 +40,7 @@ function App() {
           element={<GeneralLayout projectData={data?.projects} />}
         />
         <Route
-          path="/case-study/:id"
+          path="/case-study/:name"
           element={<GeneralLayout projectData={data?.projects} />}
         />
       </Routes>

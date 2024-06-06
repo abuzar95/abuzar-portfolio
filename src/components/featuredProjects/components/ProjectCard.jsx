@@ -8,7 +8,10 @@ import { useNavigate } from "react-router-dom";
 export const ProjectCard = ({ data, projectName, id, heroImage }) => {
   const navigate = useNavigate();
   const baseURL = process.env.REACT_APP_URL;
-  console.log(id, "ggggggggg");
+
+  const addHyphen = (str) => {
+    return str.trim().replace(/\s+/g, "-");
+  };
 
   return (
     <div className="w-full flex flex-col justify-center items-center gap-5">
@@ -22,7 +25,7 @@ export const ProjectCard = ({ data, projectName, id, heroImage }) => {
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
             }}
-            onClick={() => navigate(`/case-study/${id}`)}
+            onClick={() => navigate(`/case-study/${addHyphen(projectName)}`)}
           >
             <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex justify-center items-center">
               <p className="text-7xl capitalize ">

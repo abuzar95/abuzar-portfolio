@@ -1,16 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useData } from "../../../DataContext";
 
 export const ExperienceList = () => {
-  const {data} = useData();
- 
+  const [sortedData, setSortedData] = useState([]);
+  const { data } = useData();
+
+  useEffect(() => {
+    if (data) {
+      const sorted = [...data?.experience].sort((a, b) => {
+        const endYearA =
+          a.timeSpan.endYear === "Current"
+            ? Infinity
+            : parseInt(a.timeSpan.endYear, 10);
+        const endYearB =
+          b.timeSpan.endYear === "Current"
+            ? Infinity
+            : parseInt(b.timeSpan.endYear, 10);
+
+        if (endYearA !== endYearB) {
+          return endYearB - endYearA;
+        } else {
+          return b.timeSpan.startYear - a.timeSpan.startYear;
+        }
+      });
+      setSortedData(sorted);
+    }
+  }, [data]);
+
   return (
     <div className="">
       <ul className="space-y-5 md:space-y-11 relative md:before:content-[''] md:before:absolute lg:before:left-64 lg:before:border-r lg:before:border-[#3b3b3b] lg:dark:before:border-night-black md:before:h-[calc(100%_-1.5rem)] md:before:top-1/2 md:before:-translate-y-1/2">
-        {data?.experience?.map((obj, index) => (
+        {sortedData?.map((obj, index) => (
           <li
             key={index}
-            className="p-5 border  rounded-xl relative md:flex max-md:space-y-2 border-[$] dark:border-night-black md:border-0 md:p-0 md:rounded-none"
+            className="p-5 border rounded-xl relative md:flex max-md:space-y-2 border-[$] dark:border-night-black md:border-0 md:p-0 md:rounded-none"
           >
             <div className="flex items-center justify-between mb-5 md:w-60 md:block md:mb-0 relative">
               <h6 className="text-sm font-medium text-white text-opacity-60 md:text-base md:text-opacity-100">
@@ -19,7 +42,7 @@ export const ExperienceList = () => {
               <p className="text-[13px] md:text-sm text-primary">{`${obj?.timeSpan?.startYear} - ${obj?.timeSpan?.endYear}`}</p>
               {/* Dot positioned on the top of the right border */}
               <div
-                className="before-dot hidden  lg:block"
+                className="before-dot hidden lg:block"
                 style={{
                   position: "absolute",
                   right: "-12.5%",

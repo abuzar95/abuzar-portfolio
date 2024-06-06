@@ -8,6 +8,7 @@ import { GrWorkshop } from "react-icons/gr";
 import { MdMessage } from "react-icons/md";
 import { FaEnvelope } from "react-icons/fa6";
 import { logo } from "../../assets/img";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const navLinks = [
   { Icon: <IoHomeOutline />, tooltip: "Home", id: "home" },
@@ -20,8 +21,13 @@ const navLinks = [
   { Icon: <FaEnvelope />, tooltip: "Contact", id: "contact" },
 ];
 
+const caseStudyLinks = [{ Icon: <IoHomeOutline />, tooltip: "Home", id: "/" }];
+
 export const DesktopNav = () => {
   const [activeLink, setActiveLink] = useState(null);
+  const location = useLocation();
+  const currentLocation = location.pathname.split("/")[1];
+  const navigate = useNavigate();
 
   const handleButtonClick = (sectionId) => {
     const section = document.getElementById(sectionId);
@@ -45,19 +51,33 @@ export const DesktopNav = () => {
         </div>
       </div>
       <div className="w-full flex flex-col gap-4 items-center h-full justify-between">
-        {navLinks.map((link) => (
-          <div
-            key={link.id}
-            onClick={() => handleButtonClick(link.id)}
-            className={`hover:bg-primaryDark hover:text-secondary p-1 rounded-full cursor-pointer ${
-              activeLink === link.id ? "bg-primaryDark text-secondary" : ""
-            }`}
-          >
-            <button type="button" className="text-xl p-2">
-              {link.Icon}
-            </button>
-          </div>
-        ))}
+        {currentLocation !== "case-study"
+          ? navLinks.map((link) => (
+              <div
+                key={link.id}
+                onClick={() => handleButtonClick(link.id)}
+                className={`hover:bg-primaryDark hover:text-secondary p-1 rounded-full cursor-pointer ${
+                  activeLink === link.id ? "bg-primaryDark text-secondary" : ""
+                }`}
+              >
+                <button type="button" className="text-xl p-2">
+                  {link.Icon}
+                </button>
+              </div>
+            ))
+          : caseStudyLinks.map((link) => (
+              <div
+                key={link.id}
+                onClick={() => navigate(link.id)}
+                className={`hover:bg-primaryDark hover:text-secondary p-1 rounded-full cursor-pointer ${
+                  activeLink === link.id ? "bg-primaryDark text-secondary" : ""
+                }`}
+              >
+                <button type="button" className="text-xl p-2">
+                  {link.Icon}
+                </button>
+              </div>
+            ))}
       </div>
     </div>
   );

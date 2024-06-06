@@ -7,6 +7,13 @@ import { useData } from "../../DataContext";
 export const CaseStudy = ({ projectData }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const url = process.env.REACT_APP_URL;
+  const profileId = process.env.REACT_APP_ID;
+  const { setData } = useData();
+
+  const removeHyphen = (str) => {
+    return str.replace(/-/g, " ");
+  };
 
   const openModal = (index) => {
     setSelectedImageIndex(index);
@@ -25,11 +32,36 @@ export const CaseStudy = ({ projectData }) => {
   const location = useLocation();
   const baseURL = process.env.REACT_APP_URL;
   const id = location.pathname.split("/")[2];
+  const name = location.pathname.split("/")[2];
   const data = useData();
   const [newData, setNewData] = useState();
+
   useEffect(() => {
-    setNewData(data?.data?.projects?.[id]);
-  }, []);
+    if (data?.data == null) {
+      const getPortfolio = async () => {
+        try {
+          const res = await fetch(`${url}/developer/${profileId}`, {
+            method: "GET",
+          });
+          const dev = await res.json();
+          console.log("object", dev.data);
+          setData(dev.data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+
+      if (profileId) {
+        getPortfolio();
+      }
+    }
+    const projectId =
+      data?.data?.projects &&
+      data?.data?.projects?.findIndex(
+        (item) => item?.projectName.trim() == removeHyphen(name)
+      );
+    setNewData(data?.data?.projects?.[projectId]);
+  }, [data, data?.data]);
 
   console.log(projectData, "p");
 
@@ -38,7 +70,7 @@ export const CaseStudy = ({ projectData }) => {
       <div className="w-full flex justify-start items-start flex-col">
         <ButtonWithIcon Icon={FcViewDetails} text={"Project Details"} />
         <h2 className="text-[20px] md:text-[30px] font-bold text-white py-2">
-          {projectData[id]?.thumbNail}
+          {projectData && projectData[id]?.thumbNail}
         </h2>
         <div className="w-full mb-4 py-4">
           <ProjectHerosSection data={newData} img={newData?.hero} />
@@ -47,7 +79,7 @@ export const CaseStudy = ({ projectData }) => {
           <Stepper />
           {/* Repeat */}
           <div className="flex justify-between xl:flex-row lg:zflex-row md:flex-row sm:flex-col xs:flex-col">
-            {projectData[id]?.gallery?.length > 0 ? (
+            {projectData && projectData[id]?.gallery?.length > 0 ? (
               projectData[id]?.gallery?.map((e) => (
                 <div className="w-full md:w-[48%]  p-4 border border-night-black rounded-2xl relative group">
                   <div
