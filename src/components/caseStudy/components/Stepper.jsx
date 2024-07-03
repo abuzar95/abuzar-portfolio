@@ -10,7 +10,12 @@ export const Stepper = () => {
   const id = location.pathname.split("/")[2];
   const { data } = useData();
   const sanitizedDescription = DOMPurify.sanitize(
-    data?.projects?.[id]?.description
+    data?.projects.map((i)=>{
+      if(i?.projectName == id){
+        console.log(i?.description, "descf")
+        return i?.description;
+      }
+    })
   );
 
   return (
