@@ -5,6 +5,7 @@ export const ExperienceList = () => {
   const [sortedData, setSortedData] = useState([]);
   const { data } = useData();
 
+
   useEffect(() => {
     if (data) {
       const sorted = [...data?.experience].sort((a, b) => {

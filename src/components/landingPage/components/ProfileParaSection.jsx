@@ -9,7 +9,6 @@ import { useData } from "../../../DataContext";
 export const ProfileParaSection = () => {
   const { data } = useData();
   const baseURL = process.env.REACT_APP_URL;
-  console.log(data, "data2")
   const handleButtonClick = () => {
     const section = document.getElementById("contact");
     if (section) {

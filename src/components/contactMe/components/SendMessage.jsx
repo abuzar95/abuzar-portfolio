@@ -14,7 +14,6 @@ export const SendMessage = () => {
     setIsLoading(true);
     const response = await sendMail(formData);
     if (response?.status == 200) {
-      console.log("success");
       setFormData({
         senderName: "",
         from: "",

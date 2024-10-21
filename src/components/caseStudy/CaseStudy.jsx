@@ -44,7 +44,6 @@ export const CaseStudy = ({ projectData }) => {
             method: "GET",
           });
           const dev = await res.json();
-          console.log("object", dev.data);
           setData(dev.data);
         } catch (error) {
           console.error("Error fetching data:", error);

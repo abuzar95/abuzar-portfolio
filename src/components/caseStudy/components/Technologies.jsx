@@ -2,7 +2,6 @@ import React from "react";
 import { SkillRatingsSlider } from "./SkillRatingsSlider";
 
 export const Technologies = ({ data }) => {
-  console.log(data, "123");
   return (
     <div className="w-full flex flex-col gap-5">
       <h1 className="w-full font-bold text-white mb-5">Technologies</h1>
@@ -25,7 +24,6 @@ export const Technologies = ({ data }) => {
 // import { softwareHouseTechnologies } from "../../../assets/icons/Icons";
 
 // export const Technologies = ({ data }) => {
-//   console.log(data);
 //   return (
 //     <div className="w-full flex flex-col gap-5">
 //     <h1 className="w-full font-bold text-white mb-5">Technologies</h1>

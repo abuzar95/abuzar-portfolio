@@ -50,7 +50,6 @@ export const ProfileIntroLeftSide = () => {
 
   const navigate = useNavigate();
 
-  console.log("data", data);
   return (
     <div
       style={{
