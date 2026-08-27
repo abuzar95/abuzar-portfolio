@@ -1,77 +1,100 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoIosSend } from "react-icons/io";
-
 import { Features } from "./Features";
-import heroImage2 from "../../../assets/img/herow (1) 1.png";
 import { Carousel } from "./Carousel";
-import { Heading } from "../../genralComponents";
+import { HeroMedia } from "./HeroMedia";
 import { useData } from "../../../DataContext";
+
 export const ProfileParaSection = () => {
   const { data } = useData();
-  const baseURL = process.env.REACT_APP_URL;
-  const handleButtonClick = () => {
-    const section = document.getElementById("contact");
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
+  const [ctaHover, setCtaHover] = useState(false);
+
+  const scrollTo = (id) => {
+    const section = document.getElementById(id);
+    if (section) section.scrollIntoView({ behavior: "smooth" });
   };
+
   return (
     <div
       className="w-full xl:p-8 lg:p-8 md:p-8 sm:p-0 xs:p-0 xss:p-0"
       id="home"
     >
-      <div className="w-full flex justify-between items-center gap-4 mb-9">
-        <div className="w-full xl:w-[100%] flex justify-start items-center">
-          <div className="w-full flex justify-start items-start flex-col">
-            <Heading prefix={"I Craft The"} postfix={"Digital Landscape"} />
-            {/* <div className=" w-full flex justify-start items-start flex-col">
-      <h2 className="font-thin text-white xl:text-[2.2rem] lg:text-[2.2rem]md:text-[2.2rem] sm:text-[2.2rem] xs:text-[2.2rem] xss:text-[2.2rem]">
-        {prefix}{" "}<br/>
-        <span className="text-secondary font-bold">
-          {postfix}
-        </span>
-      </h2>
-      <p className="text-lg text-primary leading-6 mb-5">{description}</p>
-    </div> */}
-            <div className=" flex flex-wrap mb-5 ">
-              {/* <p className="w-full text-primary leading-6 text-sm flex flex-wrap">
-                I am a
-                <strong className="text-white"> Frontend Developer </strong>
-                at heart and, i create feautres that are best suited for the job
-                at hand.
-              </p> */}
-              <p className="w-full text-primary leading-6 text-md flex flex-wrap">
-                {data?.intro}
+      <div className="w-full flex flex-col lg:flex-row justify-between items-stretch gap-8 mb-8">
+        <div className="w-full lg:w-[54%] flex justify-start items-start flex-col hero-animate">
+          <p className="text-secondary text-sm uppercase tracking-[0.2em] mb-3">
+            Introduce
+          </p>
+          <h1 className="text-ink text-3xl md:text-5xl font-bold leading-tight mb-3">
+            {data?.name ? (
+              <>
+                Hi, I&apos;m{" "}
+                <span className="text-secondary hero-name-glow">
+                  {data.name}
+                </span>
+              </>
+            ) : (
+              "Welcome"
+            )}
+          </h1>
+
+          {data?.intro && (
+            <p className="text-read text-base md:text-lg leading-7 mb-4 max-w-2xl prose-read">
+              {data.intro}
+            </p>
+          )}
+
+          {data?.about && (
+            <div className="w-full max-w-2xl mb-6">
+              <h2 className="text-ink text-xl md:text-2xl font-semibold mb-3">
+                About Me
+              </h2>
+              <p className="text-read text-base md:text-[1.05rem] leading-7 tracking-wide">
+                {data.about}
               </p>
             </div>
-            <div className="w-full flex justify-start items-start mb-7 capitalize">
-              <Features text="Available for Work" />
-              <Features text={data?.availability} />
-            </div>
+          )}
+
+          <div className="flex flex-wrap gap-3 mb-7">
+            <Features text="Available for Work" />
+            {data?.availability && <Features text={data.availability} />}
+          </div>
+
+          <div className="w-full flex flex-wrap gap-3 items-center">
             <button
-              onClick={handleButtonClick}
-              className="flex justify-start items-center px-7 py-5 bg-secondary text-white gap-3 uppercase rounded-full "
+              type="button"
+              onClick={() => scrollTo("contact")}
+              onMouseEnter={() => setCtaHover(true)}
+              onMouseLeave={() => setCtaHover(false)}
+              className={`flex justify-start items-center px-7 py-4 bg-secondary text-white gap-3 uppercase rounded-full transition-transform duration-300 ${
+                ctaHover
+                  ? "scale-105 shadow-[0_0_24px_rgba(6,156,122,0.45)]"
+                  : ""
+              }`}
             >
-              <span>
-                <IoIosSend />
-              </span>
-              hire me
+              <IoIosSend />
+              Hire me
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollTo("projects")}
+              className="flex justify-start items-center px-7 py-4 border border-secondary text-secondary gap-3 uppercase rounded-full hover:bg-secondary hover:text-white transition-colors duration-300"
+            >
+              View projects
             </button>
           </div>
         </div>
-        {/* <div className="w-[50% ] hidden sm:flex justify-start items-center ">
-          <div className=" w-full flex justify-start items-center">
-            <img src={heroImage2} alt="profle" className="max-h-[350px]" />
-          </div>
-        </div> */}
-      </div>
-      <div className=" relative w-full flex mb-5">
-        <div className="hidden md:flex flex-col justify-start items-start  w-[17%] border-l-2 border-l-secondary">
-          <p className="text-sm ml-2">Trusted</p>
 
-          <p className="text-sm ml-2">Technologies</p>
+        <div className="w-full lg:w-[46%] flex items-center">
+          <HeroMedia videoUrl={data?.introVideo} name={data?.name} />
         </div>
-        <div className="w-[83%]">
+      </div>
+
+      <div className="relative w-full flex mb-2 items-center">
+        <div className="hidden md:flex flex-col justify-start items-start w-[17%] border-l-2 border-l-secondary pl-2">
+          <p className="text-sm text-primary">Trusted</p>
+          <p className="text-sm text-primary">Technologies</p>
+        </div>
+        <div className="w-full md:w-[83%]">
           <Carousel />
         </div>
       </div>

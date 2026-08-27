@@ -43,8 +43,8 @@ export const DoughnutLeft = ({
             {
               label: "# of Votes",
               data: [skillRate, 100 - skillRate],
-              backgroundColor: ["#00BC91", "#212223"],
-              borderColor: ["#00BC91", "#7a7a7a"],
+              backgroundColor: ["#069C7A", "#212223"],
+              borderColor: ["#069C7A", "#3b3b3b"],
               borderWidth: 2,
             },
           ],

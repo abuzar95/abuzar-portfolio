@@ -5,7 +5,6 @@ export const ExperienceList = () => {
   const [sortedData, setSortedData] = useState([]);
   const { data } = useData();
 
-
   useEffect(() => {
     if (data) {
       const sorted = [...data?.experience].sort((a, b) => {
@@ -37,10 +36,10 @@ export const ExperienceList = () => {
             className="p-5 border rounded-xl relative md:flex max-md:space-y-2 border-[$] dark:border-night-black md:border-0 md:p-0 md:rounded-none"
           >
             <div className="flex items-center justify-between mb-5 md:w-60 md:block md:mb-0 relative">
-              <h6 className="text-sm font-medium text-white text-opacity-60 md:text-base md:text-opacity-100">
+              <h6 className="text-sm font-medium text-ink text-opacity-60 md:text-base md:text-opacity-100">
                 {obj?.company}
               </h6>
-              <p className="text-[13px] md:text-sm text-primary">{`${obj?.timeSpan?.startYear} - ${obj?.timeSpan?.endYear}`}</p>
+              <p className="text-[13px] md:text-sm text-mute">{`${obj?.timeSpan?.startYear} - ${obj?.timeSpan?.endYear}`}</p>
               {/* Dot positioned on the top of the right border */}
               <div
                 className="before-dot hidden lg:block"
@@ -75,10 +74,10 @@ export const ExperienceList = () => {
               </div>
             </div>
             <div className="md:flex-1 lg:pl-12">
-              <h4 className="text-xl xl:text-2xl font-medium xl:font-medium leading-7 text-white mb-2.5">
+              <h4 className="text-xl xl:text-2xl font-medium xl:font-medium leading-7 text-ink mb-2.5">
                 {obj?.role}
               </h4>
-              <p className="text-sm text-primary leading-5">
+              <p className="text-base text-read leading-6">
                 {obj?.description}
               </p>
             </div>

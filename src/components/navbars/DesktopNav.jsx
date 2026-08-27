@@ -1,22 +1,19 @@
 import React, { useState } from "react";
 import { IoHomeOutline } from "react-icons/io5";
-import { FaRegUser } from "react-icons/fa";
 import { MdHomeRepairService } from "react-icons/md";
-import { FaGraduationCap } from "react-icons/fa";
 import { IoDocumentText } from "react-icons/io5";
 import { GrWorkshop } from "react-icons/gr";
 import { MdMessage } from "react-icons/md";
 import { FaEnvelope } from "react-icons/fa6";
 import { logo } from "../../assets/img";
 import { useLocation, useNavigate } from "react-router-dom";
+import { readProjectFilters } from "../caseStudy/components/CaseStudyBackButton";
 
 const navLinks = [
   { Icon: <IoHomeOutline />, tooltip: "Home", id: "home" },
-  { Icon: <FaRegUser />, tooltip: "About", id: "about" },
-  { Icon: <MdHomeRepairService />, tooltip: "Service", id: "service" },
-  { Icon: <FaGraduationCap />, tooltip: "Skills", id: "skills" },
-  { Icon: <IoDocumentText />, tooltip: "Resume", id: "resume" },
   { Icon: <GrWorkshop />, tooltip: "Projects", id: "projects" },
+  { Icon: <MdHomeRepairService />, tooltip: "Service", id: "service" },
+  { Icon: <IoDocumentText />, tooltip: "Resume", id: "resume" },
   { Icon: <MdMessage />, tooltip: "Testimonial", id: "testimonial" },
   { Icon: <FaEnvelope />, tooltip: "Contact", id: "contact" },
 ];
@@ -29,22 +26,47 @@ export const DesktopNav = () => {
   const currentLocation = location.pathname.split("/")[1];
   const navigate = useNavigate();
 
+  const goHomeFromCaseStudy = () => {
+    const filters = readProjectFilters() || {};
+    navigate("/", {
+      state: {
+        restoreProjects: true,
+        query: filters.query || "",
+        activeTag: filters.activeTag || "",
+        visibleCount: filters.visibleCount || 6,
+      },
+    });
+    setTimeout(() => {
+      window.dispatchEvent(
+        new CustomEvent("open-section", { detail: { id: "projects" } })
+      );
+      document
+        .getElementById("projects")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 80);
+  };
+
   const handleButtonClick = (sectionId) => {
+    window.dispatchEvent(
+      new CustomEvent("open-section", { detail: { id: sectionId } })
+    );
     const section = document.getElementById(sectionId);
     if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+      requestAnimationFrame(() => {
+        section.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
       setActiveLink(sectionId);
     }
   };
 
   return (
     <div
-      className="w-full flex justify-center flex-col items-center gap-3 p-2 rounded-full"
-      style={{ border: "1px solid  #333" }}
+      className="w-full flex justify-center flex-col items-center gap-3 p-2 rounded-full bg-primaryDark"
+      style={{ border: "1px solid #3b3b3b" }}
     >
       <div
-        className="btn btn-circle hover:rounded-full border text-white justify-center items-center relative border-night-black"
-        style={{ border: "1px solid #333" }}
+        className="btn btn-circle hover:rounded-full border text-ink justify-center items-center relative border-night-black bg-primaryDark"
+        style={{ border: "1px solid #3b3b3b" }}
       >
         <div className="w-full flex justify-center items-center">
           <img src={logo} alt="" />
@@ -56,8 +78,12 @@ export const DesktopNav = () => {
               <div
                 key={link.id}
                 onClick={() => handleButtonClick(link.id)}
-                className={`hover:bg-primaryDark hover:text-secondary p-1 rounded-full cursor-pointer ${
-                  activeLink === link.id ? "bg-primaryDark text-secondary" : ""
+                title={link.tooltip}
+                aria-label={link.tooltip}
+                className={`hover:bg-canvas hover:text-secondary p-1 rounded-full cursor-pointer ${
+                  activeLink === link.id
+                    ? "bg-canvas text-secondary"
+                    : "text-mute"
                 }`}
               >
                 <button type="button" className="text-xl p-2">
@@ -68,9 +94,13 @@ export const DesktopNav = () => {
           : caseStudyLinks.map((link) => (
               <div
                 key={link.id}
-                onClick={() => navigate(link.id)}
-                className={`hover:bg-primaryDark hover:text-secondary p-1 rounded-full cursor-pointer ${
-                  activeLink === link.id ? "bg-primaryDark text-secondary" : ""
+                onClick={goHomeFromCaseStudy}
+                title="Back to projects"
+                aria-label="Back to projects"
+                className={`hover:bg-canvas hover:text-secondary p-1 rounded-full cursor-pointer ${
+                  activeLink === link.id
+                    ? "bg-canvas text-secondary"
+                    : "text-mute"
                 }`}
               >
                 <button type="button" className="text-xl p-2">

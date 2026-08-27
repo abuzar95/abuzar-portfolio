@@ -11,28 +11,39 @@ export const SendMessage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    const response = await sendMail(formData);
-    if (response?.status == 200) {
-      setFormData({
-        senderName: "",
-        from: "",
-        message: "",
-      });
-      showToast("Message send successfully");
+    if (!formData.senderName || !formData.from || !formData.message) {
+      showToast("Please fill in all fields.");
+      return;
     }
-    // End loading
-    setIsLoading(false);
+    setIsLoading(true);
+    try {
+      const response = await sendMail(formData);
+      if (response?.status === 200) {
+        setFormData({
+          senderName: "",
+          from: "",
+          message: "",
+        });
+        showToast("Message sent successfully");
+      } else {
+        showToast("Could not send message. Please try again.");
+      }
+    } catch (error) {
+      showToast("Could not send message. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   function showToast(message) {
     const toastContainer = document.getElementById("toastContainer");
+    if (!toastContainer) return;
     const toast = document.createElement("div");
     toast.textContent = message;
     toast.classList.add("customToast");
     toastContainer.appendChild(toast);
     setTimeout(() => {
-      toast.remove(); // Remove the toast after a certain duration (e.g., 5 seconds)
+      toast.remove();
     }, 5000);
   }
 
@@ -43,7 +54,8 @@ export const SendMessage = () => {
           type="text"
           placeholder="Name"
           name="senderName"
-          className="input bg-transparent input-bordered w-full md:max-w-xs"
+          required
+          className="input bg-transparent input-bordered w-full max-w-md"
           onChange={(e) =>
             setFormData({ ...formData, senderName: e.target.value })
           }
@@ -53,7 +65,8 @@ export const SendMessage = () => {
           type="email"
           placeholder="E-mail"
           name="from"
-          className="input bg-transparent input-bordered w-full md:max-w-xs"
+          required
+          className="input bg-transparent input-bordered w-full max-w-md"
           onChange={(e) => setFormData({ ...formData, from: e.target.value })}
           value={formData?.from}
         />
@@ -61,16 +74,18 @@ export const SendMessage = () => {
           placeholder="Message"
           name="message"
           rows={"5"}
-          className="w-full px-5 py-4 border border-night-black md:max-w-xs rounded-lg bg-transparent outline-none  "
+          required
+          className="w-full max-w-md px-5 py-4 border border-night-black rounded-lg bg-transparent outline-none"
           onChange={(e) =>
             setFormData({ ...formData, message: e.target.value })
           }
           value={formData?.message}
         ></textarea>
-        <div className="w-full flex justify-start items-center ">
+        <div className="w-full flex justify-start items-center">
           <button
+            type="submit"
             disabled={isLoading}
-            className="py-4 px-7 bg-secondary rounded-full"
+            className="py-4 px-7 bg-secondary text-white rounded-full disabled:opacity-60"
           >
             {isLoading ? "Sending..." : "Send Message"}
           </button>

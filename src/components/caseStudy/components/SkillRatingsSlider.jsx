@@ -13,7 +13,7 @@ export const SkillRatingsSlider = ({ icon, skillName, skillValue }) => {
         setValue(skillValue);
       }, 100);
     }
-  }, [inViewport]);
+  }, [inViewport, skillValue]);
 
   const fillStyle = {
     width: `${value}%`,
@@ -26,7 +26,7 @@ export const SkillRatingsSlider = ({ icon, skillName, skillValue }) => {
         <img src={icon} alt={icon} />
       </div> */}
       <div className="w-[95%] flex flex-col justify-start items-start gap-2">
-        <h2 className="text-white text-[18px] capitalize">{skillName}</h2>
+        <h2 className="text-ink text-[18px] capitalize">{skillName}</h2>
         <div
           ref={sliderRef}
           className="relative w-full h-3 bg-transparent rounded-full border border-night-black"

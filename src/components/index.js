@@ -10,4 +10,5 @@ export * from "./testimonial";
 export * from "./navbars";
 export * from "./contactMe";
 export * from "./caseStudy";
-export * from "./BackgroundImage"
+export * from "./BackgroundImage";
+export * from "./PortfolioAssembleIntro";

@@ -1,42 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useData } from "../../../DataContext";
-const data = [
-  {
-    name: "Envato Market",
-    date: "Mar, 2024 - Current",
-    role: "UI/UX",
-    description:
-      "Owing to advancements in product other designer technologies aute voluptate.",
-  },
-  {
-    name: "Envato Market",
-    date: "Mar, 2024 - Current",
-    role: "UI/UX",
-    description:
-      "Owing to advancements in product other designer technologies aute voluptate.",
-  },
-  {
-    name: "Envato Market",
-    date: "Mar, 2024 - Current",
-    role: "UI/UX",
-    description:
-      "Owing to advancements in product other designer technologies aute voluptate.",
-  },
-  {
-    name: "Envato Market",
-    date: "Mar, 2024 - Current",
-    role: "UI/UX",
-    description:
-      "Owing to advancements in product other designer technologies aute voluptate.",
-  },
-];
+
 export const EducationList = () => {
   const [sortedData, setSortedData] = useState([]);
   const { data } = useData();
 
   useEffect(() => {
-    if (data) {
-      const sorted = [...data?.education].sort((a, b) => {
+    if (data?.education) {
+      const sorted = [...data.education].sort((a, b) => {
         const endYearA =
           a.timeSpan.endYear === "Current"
             ? Infinity
@@ -54,7 +25,7 @@ export const EducationList = () => {
       });
       setSortedData(sorted);
     }
-  }, [data?.education]);
+  }, [data]);
 
   return (
     <div className="">
@@ -65,10 +36,10 @@ export const EducationList = () => {
             className="p-5 border  rounded-xl relative md:flex max-md:space-y-2 border-[$] dark:border-night-black md:border-0 md:p-0 md:rounded-none"
           >
             <div className="flex items-center justify-between mb-5 md:w-60 md:block md:mb-0 relative">
-              <h6 className="text-sm font-medium text-white text-opacity-60 md:text-base md:text-opacity-100">
+              <h6 className="text-sm font-medium text-ink text-opacity-60 md:text-base md:text-opacity-100">
                 {obj?.institution}
               </h6>
-              <p className="text-[13px] md:text-sm text-primary">{`${obj?.timeSpan?.startYear} - ${obj?.timeSpan?.endYear}`}</p>
+              <p className="text-[13px] md:text-sm text-mute">{`${obj?.timeSpan?.startYear} - ${obj?.timeSpan?.endYear}`}</p>
               {/* Dot positioned on the top of the right border */}
               <div
                 className="before-dot hidden  lg:block"
@@ -103,10 +74,10 @@ export const EducationList = () => {
               </div>
             </div>
             <div className="md:flex-1 lg:pl-12">
-              <h4 className="text-xl xl:text-2xl font-medium xl:font-medium leading-7 text-white mb-2.5">
+              <h4 className="text-xl xl:text-2xl font-medium xl:font-medium leading-7 text-ink mb-2.5">
                 {obj?.major}
               </h4>
-              <p className="text-sm text-primary leading-5">
+              <p className="text-base text-read leading-6">
                 {obj?.description}
               </p>
             </div>

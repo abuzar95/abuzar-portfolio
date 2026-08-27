@@ -21,8 +21,8 @@
   left: -5px !important;
   width: 10px;
   height: 10px;
-  background-color: #07c02f; 
-  filter:drop-shadow(0 -2px 5px #07c02f ) ;
+  background-color: #069c7a;
+  filter: drop-shadow(0 -2px 5px rgba(6, 156, 122, 0.45));
   transform: rotate(45deg);
   animation: animate-custom-animation 30s linear infinite;
   animation-duration: calc(var(--isci));
@@ -33,8 +33,8 @@
   left: -5px !important;
   width: 10px;
   height: 10px;
-  background-color: #07c02f; 
-  filter:drop-shadow(0 -2px 5px #07c02f ) ;
+  background-color: #069c7a;
+  filter: drop-shadow(0 -2px 5px rgba(6, 156, 122, 0.45));
   transform: rotate(45deg);
   animation: animate-reverse-animation 30s linear infinite;
   animation-duration: calc(var(--isci));

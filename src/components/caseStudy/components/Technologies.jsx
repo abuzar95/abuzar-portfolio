@@ -1,43 +1,45 @@
 import React from "react";
-import { SkillRatingsSlider } from "./SkillRatingsSlider";
+import { softwareHouseTechnologies } from "../../../assets/icons/Icons";
+import { HiOutlineSparkles } from "react-icons/hi";
 
 export const Technologies = ({ data }) => {
+  const items =
+    data
+      ?.filter((item) => item?.name?.skillName)
+      ?.map((item) => item.name.skillName) || [];
+
+  if (!items.length) return null;
+
   return (
-    <div className="w-full flex flex-col gap-5">
-      <h1 className="w-full font-bold text-white mb-5">Technologies</h1>
-      {data?.map((i) => {
-        if (i?.name?.skillName) {
-          return (
-            <SkillRatingsSlider
-              skillValue={i?.level}
-              skillName={i?.name?.skillName}
-            />
+    <section className="case-block">
+      <header className="case-block-head">
+        <p className="case-eyebrow">Stack</p>
+        <h3 className="case-block-title">
+          <span className="case-block-title-accent">Technologies</span>
+        </h3>
+      </header>
+      <div className="case-tech-grid">
+        {items.map((skillName, index) => {
+          const matched = softwareHouseTechnologies.find(
+            (tech) => tech.name.toLowerCase() === skillName.toLowerCase()
           );
-        }
-      })}
-    </div>
+          const icon = matched?.icon;
+          return (
+            <div key={`${skillName}-${index}`} className="case-tech-card">
+              <span className="case-tech-icon">
+                {icon
+                  ? React.cloneElement(icon, {
+                      style: { height: "22px", width: "22px" },
+                    })
+                  : (
+                      <HiOutlineSparkles size={22} />
+                    )}
+              </span>
+              <span className="case-tech-name">{skillName}</span>
+            </div>
+          );
+        })}
+      </div>
+    </section>
   );
 };
-
-// import React from "react";
-// import { SkillRatingsSlider } from "./SkillRatingsSlider";
-// import { softwareHouseTechnologies } from "../../../assets/icons/Icons";
-
-// export const Technologies = ({ data }) => {
-//   return (
-//     <div className="w-full flex flex-col gap-5">
-//     <h1 className="w-full font-bold text-white mb-5">Technologies</h1>
-//     {data?.map((technology) => {
-//       // Find the icon for the current technology
-//       const matchedIcon = softwareHouseTechnologies.find(icon => icon.name.toLowerCase() === technology?.name?.skillName.toLowerCase());
-
-//       return (
-//         <div key={technology._id} className="flex items-center gap-2">
-//           {matchedIcon && matchedIcon.icon} {/* Render the icon if found */}
-//           <SkillRatingsSlider skillValue={30} skillName={technology?.name?.skillName} />
-//         </div>
-//       );
-//     })}
-//   </div>
-//   );
-// };

@@ -1,29 +1,47 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Stepper.css";
-import { TiTick } from "react-icons/ti";
 import { useData } from "../../../DataContext";
-import { useLocation } from "react-router-dom";
 import DOMPurify from "dompurify";
+import { formatHighlightedText } from "./richText";
 
-export const Stepper = () => {
-  const location = useLocation();
-  const id = location.pathname.split("/")[2];
+export const Stepper = ({ projectName, title = "Overview" }) => {
   const { data } = useData();
-  const sanitizedDescription = DOMPurify.sanitize(
-    data?.projects.find((i) => i?.projectName === id)?.description || ""
+  const normalized = (projectName || "").toLowerCase().trim();
+  const project = data?.projects?.find(
+    (i) =>
+      i?.projectName?.trim()?.toLowerCase() === normalized ||
+      i?.projectName?.trim()?.toLowerCase()?.replace(/\s+/g, "-") ===
+        normalized.replace(/\s+/g, "-")
   );
 
+  const raw = String(project?.description || "").trim();
+  if (!raw) return null;
+
+  const looksLikeHtml = /<\/?[a-z][\s\S]*>/i.test(raw);
+  let html;
+  if (looksLikeHtml) {
+    html = DOMPurify.sanitize(raw, { ADD_ATTR: ["class"] })
+      .replace(
+        /\[\[(.+?)\]\]/g,
+        '<mark class="case-highlight">$1</mark>'
+      )
+      .replace(/\*\*(.+?)\*\*/g, '<mark class="case-highlight">$1</mark>');
+  } else {
+    html = formatHighlightedText(raw).replace(/\n/g, "<br />");
+  }
+
   return (
-    <div className="w-full gap-4">
-      <div className="py-2 w-full">
-        <div className="text-2xl font-bold mb-4 text-white flex gap-1 items-baseline justify-start">
-          Project Description:
-        </div>
-        <div
-          className="text-sm text-primary"
-          dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
-        ></div>
-      </div>
-    </div>
+    <section className="case-block">
+      <header className="case-block-head">
+        <p className="case-eyebrow">Details</p>
+        <h3 className="case-block-title">
+          <span className="case-block-title-accent">{title}</span>
+        </h3>
+      </header>
+      <div
+        className="case-prose"
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+    </section>
   );
 };

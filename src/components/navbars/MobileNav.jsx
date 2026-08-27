@@ -6,15 +6,19 @@ export const MobileNav = () => {
 
   const handleLinkClick = (linkId) => {
     setActiveLink(linkId);
+    window.dispatchEvent(
+      new CustomEvent("open-section", { detail: { id: linkId } })
+    );
   };
   return (
     <div
       style={{
-        background: "rgba(61, 58, 58, 0.74)",
-        WebkitBackdropFilter: "blur(12px)", // Use Webkit prefix for Webkit properties
+        background: "rgba(24, 25, 26, 0.86)",
+        WebkitBackdropFilter: "blur(12px)",
         backdropFilter: "blur(12px)",
+        borderBottom: "1px solid #3b3b3b",
       }}
-      className=" w-full from-black to-white "
+      className=" w-full"
     >
       <div className=" w-full py-2 flex justify-start items-center">
         {/* <div className="w-full navbar-start">User</div> */}
@@ -56,14 +60,13 @@ export const MobileNav = () => {
                   Home
                 </a>
               </li>
-
               <li>
                 <a
-                  href="#about"
-                  onClick={() => handleLinkClick("about")}
-                  className={activeLink === "about" ? "text-secondary" : ""}
+                  href="#projects"
+                  onClick={() => handleLinkClick("projects")}
+                  className={activeLink === "projects" ? "text-secondary" : ""}
                 >
-                  About Me
+                  Projects
                 </a>
               </li>
               <li>
@@ -77,30 +80,11 @@ export const MobileNav = () => {
               </li>
               <li>
                 <a
-                  href="#skills"
-                  onClick={() => handleLinkClick("skills")}
-                  className={activeLink === "skills" ? "text-secondary" : ""}
-                >
-                  Skills
-                </a>
-              </li>
-              <li>
-                <a
                   href="#resume"
                   onClick={() => handleLinkClick("resume")}
                   className={activeLink === "resume" ? "text-secondary" : ""}
                 >
                   Resume
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="#projects"
-                  onClick={() => handleLinkClick("projects")}
-                  className={activeLink === "projects" ? "text-secondary" : ""}
-                >
-                  Projects
                 </a>
               </li>
               <li>

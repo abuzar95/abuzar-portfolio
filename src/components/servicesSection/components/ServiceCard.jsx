@@ -1,38 +1,38 @@
-import React, { useState } from "react";
-import { SiAffinitydesigner } from "react-icons/si";
-export const ServiceCard = ({ title, index, description }) => {
-  // const [showFullDescription, setShowFullDescription] = useState(false);
+import React from "react";
+import { getServiceIcon } from "../../../utils/serviceIcons";
+
+export const ServiceCard = ({ title, description, icon, onHire }) => {
+  const Icon = getServiceIcon(icon);
+  const bullets = String(description || "")
+    .split(/[\n•|-]+/)
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .slice(0, 4);
 
   return (
-    <div className="w-full  lg:h-[335px] xl:h-[335px] 2xl:h-[335px] 3xl:h-[335px] h-auto justify-start items-start flex-col p-4 cursor-pointer group border rounded-xl overflow-hidden border-night-black ">
-      <div className="w-full flex justify-between items-center  mb-3">
-        <h1 className="text-5xl font-extrabold transition duration-300 md:text-6xl lg:text-7xl text-greyBlack opacity-30 group-hover:opacity-100">
-          <span
-            className="text-transparent"
-            style={{ WebkitTextStroke: "1px #fff" }}
-          >
-            0{index}
-          </span>
-        </h1>
-        <SiAffinitydesigner className="text-2xl text-secondary group-hover:rotate-45 transition ease-in-out delay-100" />
+    <div className="service-scroll-card group">
+      <div className="service-scroll-icon">
+        <Icon size={28} />
       </div>
-      <div>
-        <h1 className="text-white text-2xl mb-3">{title}</h1>
-        <p className="text-md text-primary leading-6">
-          {description}
-          {/* {showFullDescription
-            ? description
-            : description.substring(0, 180)}
-          {!showFullDescription && description.length > 200 && (
-            <button
-              className="text-success underline text-sm ml-1 focus:outline-none"
-              onClick={() => setShowFullDescription(true)}
-            >
-              Show More
-            </button>
-          )} */}
-        </p>
-      </div>
+      <h3 className="text-ink text-xl font-semibold mb-2 leading-snug">
+        {title}
+      </h3>
+      {bullets.length > 1 ? (
+        <ul className="service-scroll-list">
+          {bullets.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      ) : (
+        <p className="text-primary text-sm leading-6 mb-4">{description}</p>
+      )}
+      <button
+        type="button"
+        className="mt-auto self-start text-sm uppercase tracking-wide text-secondary border border-secondary px-4 py-2 rounded-full hover:bg-secondary hover:text-white transition-colors"
+        onClick={onHire}
+      >
+        Discuss this
+      </button>
     </div>
   );
 };

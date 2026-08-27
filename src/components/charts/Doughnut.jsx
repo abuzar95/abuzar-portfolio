@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState } from "react";
-import Chart from "chart.js/auto"; // Import Chart.js
+import React, { useRef, useEffect, useState, useCallback } from "react";
+import Chart from "chart.js/auto";
 
 export const Doughnut = ({
   cutout,
@@ -13,25 +13,21 @@ export const Doughnut = ({
   const chartInstance = useRef(null);
   const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    const intervalId = setInterval(incrementCount, 0);
-
-    // Cleanup function to clear the interval when component unmounts
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
-
-  // Increment the count by 1
-  const incrementCount = () => {
+  const incrementCount = useCallback(() => {
     setCount((prevCount) => {
       if (prevCount < skillRate) {
         return prevCount + 1;
-      } else {
-        return prevCount;
       }
+      return prevCount;
     });
-  };
+  }, [skillRate]);
+
+  useEffect(() => {
+    const intervalId = setInterval(incrementCount, 0);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [incrementCount]);
 
   useEffect(() => {
     if (chartContainer.current) {
@@ -43,8 +39,8 @@ export const Doughnut = ({
             {
               label: "# of Votes",
               data: [skillRate, 100 - skillRate],
-              backgroundColor: ["#00BC91", "#212223"],
-              borderColor: ["#00BC91", "#7a7a7a"],
+              backgroundColor: ["#069C7A", "#212223"],
+              borderColor: ["#069C7A", "#3b3b3b"],
               borderWidth: 2,
             },
           ],
@@ -52,31 +48,30 @@ export const Doughnut = ({
         options: {
           plugins: {
             tooltip: {
-              enabled: false, // Disable tooltips
+              enabled: false,
             },
             legend: {
-              display: true, // Display legend
+              display: true,
             },
           },
-          cutout: `${cutout}%`, // Adjust the size of the inner circle (doughnut hole)
-          responsive: true, // Make the chart responsive
-          maintainAspectRatio: false, // Ensure the chart fills its container
+          cutout: `${cutout}%`,
+          responsive: true,
+          maintainAspectRatio: false,
           elements: {
             line: {
-              borderWidth: 1, // Adjust the width of the lines
+              borderWidth: 1,
             },
           },
         },
       });
     }
 
-    // Cleanup function to destroy the chart instance when component unmounts
     return () => {
       if (chartInstance.current) {
         chartInstance.current.destroy();
       }
     };
-  }, []);
+  }, [cutout, skillRate]);
 
   return (
     <div className=" w-full flex justify-start items-center flex-col">
@@ -99,13 +94,16 @@ export const Doughnut = ({
             fontSize: `${fontSize}px` || "24px",
             top: fontSize ? "40%" : "",
             left: fontSize ? "36%" : "",
-            color: fontSize ? "white" : ""
+            color: fontSize ? "white" : "",
           }}
         >
           {count}%
         </p>
       </div>
-      <h1 style={{ fontSize: "18px", fontWeight: "lighter" }} className="capitalize">
+      <h1
+        style={{ fontSize: "18px", fontWeight: "lighter" }}
+        className="capitalize"
+      >
         {skillName}
       </h1>
     </div>

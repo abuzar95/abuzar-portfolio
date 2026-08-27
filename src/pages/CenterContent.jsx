@@ -1,43 +1,85 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Introduce } from "../components/landingPage";
 import {
-  AboutMe,
-  WorkExperience,
   ServicesSection,
-  Skills,
   Resume,
   FeaturedProjects,
   Testimonial,
   ContactMe,
+  CollapsibleSection,
 } from "../components";
-
+import { ImStatsBars2 } from "react-icons/im";
+import { FaShoppingBag } from "react-icons/fa";
+import { IoNewspaperOutline } from "react-icons/io5";
+import { IoChatboxEllipsesOutline } from "react-icons/io5";
 
 export const CenterContent = () => {
- 
   return (
-    <div className=" w-full flex justify-start items-start flex-col py-5 xl:py-3 h-full">
-      <div id="home" className="w-full bg-primaryDark  rounded-2xl mb-7 ">
+    <div className="section-stack w-full flex justify-start items-start flex-col py-3 h-full">
+      <div id="home" className="section-block w-full bg-primaryDark rounded-2xl">
         <Introduce />
       </div>
-      <div id="about" className="w-full bg-primaryDark  rounded-2xl mb-7 ">
-        <AboutMe />
+
+      <div id="projects" className="w-full">
+        <CollapsibleSection
+          badge="Portfolio"
+          BadgeIcon={ImStatsBars2}
+          prefix="Featured"
+          postfix="Projects"
+          description="Search by name or skill to find the right work fast."
+          defaultOpen={false}
+          hashId="projects"
+        >
+          <FeaturedProjects compact />
+        </CollapsibleSection>
       </div>
-      <div id="service" className="w-full bg-primaryDark  rounded-2xl mb-7 ">
-        <ServicesSection />
+
+      <div id="service" className="w-full">
+        <CollapsibleSection
+          badge="Services"
+          BadgeIcon={FaShoppingBag}
+          prefix="My"
+          postfix="Services"
+          description="What I offer, and the skills behind the work."
+          defaultOpen={false}
+          hashId="service"
+        >
+          <ServicesSection compact />
+        </CollapsibleSection>
       </div>
-      <div id="skills" className="w-full bg-primaryDark  rounded-2xl mb-7 ">
-        <Skills />
+
+      <div id="resume" className="w-full">
+        <CollapsibleSection
+          badge="Resume"
+          BadgeIcon={IoNewspaperOutline}
+          prefix="Work"
+          postfix="History"
+          description="Experience and education."
+          defaultOpen={false}
+          hashId="resume"
+        >
+          <Resume />
+        </CollapsibleSection>
       </div>
-      <div id="resume" className="w-full bg-primaryDark  rounded-2xl mb-7 ">
-        <Resume />
+
+      <div id="testimonial" className="w-full">
+        <CollapsibleSection
+          badge="Testimonial"
+          BadgeIcon={IoChatboxEllipsesOutline}
+          prefix="What"
+          postfix="People Say"
+          description="Words from clients on quality, delivery, and impact."
+          defaultOpen={false}
+          hashId="testimonial"
+        >
+          <Testimonial compact />
+        </CollapsibleSection>
       </div>
-      <div id="projects" className="w-full bg-primaryDark  rounded-2xl mb-7 ">
-        <FeaturedProjects />
-      </div>
-      <div id="testimonial" className="w-full bg-primaryDark  rounded-2xl mb-7 ">
-        <Testimonial />
-      </div>
-      <div id="contact" className="w-full bg-primaryDark  rounded-2xl mb-7 ">
+
+      <div
+        id="contact"
+        className="section-block w-full bg-primaryDark rounded-2xl"
+      >
         <ContactMe />
       </div>
     </div>

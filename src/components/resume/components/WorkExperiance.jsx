@@ -1,17 +1,42 @@
-import React from "react";
-import { Heading } from "../../genralComponents";
+import React, { useState } from "react";
 import { ExperienceList } from "./ExperienceList";
+import { FaChevronDown } from "react-icons/fa";
 
-export const WorkExperience = ({ data, prefix, postfix }) => {
+export const WorkExperience = ({ prefix, postfix, defaultOpen = false }) => {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+
   return (
-    <div className="xl:px5 lg:px-8 md:px-5 sm:px-0 xs:px-0 xss:px-0 py-2 rounded-2xl 2xl:p-13">
-      <Heading prefix={prefix} postfix={postfix} />
-      <p className="text-md text-primary leading-6 mb-5">
-        My professional background demonstrates a history of achievements and
-        successes across multiple roles, reflecting consistent growth and impact
-        throughout my employment
-      </p>
-      <ExperienceList />
+    <div className="py-2">
+      <button
+        type="button"
+        className="w-full flex items-center justify-between gap-3 text-left group"
+        onClick={() => setIsOpen((prev) => !prev)}
+        aria-expanded={isOpen}
+      >
+        <h3 className="nested-section-heading">
+          <span className="font-medium text-ink">{prefix}</span>{" "}
+          <span className="text-secondary font-bold">{postfix}</span>
+        </h3>
+        <span
+          className={`shrink-0 w-8 h-8 rounded-full border border-night-black flex items-center justify-center text-secondary transition-transform duration-300 ${
+            isOpen ? "rotate-180 bg-secondary/10" : "rotate-0"
+          }`}
+        >
+          <FaChevronDown className="text-xs" />
+        </span>
+      </button>
+
+      <div
+        className={`resume-collapse ${isOpen ? "is-open" : ""}`}
+        aria-hidden={!isOpen}
+      >
+        <div className="resume-collapse-inner">
+          <p className="text-base text-read leading-7 mb-4 mt-2">
+            Roles and impact across projects and teams.
+          </p>
+          <ExperienceList />
+        </div>
+      </div>
     </div>
   );
 };

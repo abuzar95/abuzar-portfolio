@@ -69,7 +69,7 @@ export const RatingCarousal = () => {
                   {rating.clientReview}
                 </span>
                 <div className="mt-5 text-center">
-                  <h6 className="text-white font-medium text-lg font-bold">
+                  <h6 className="text-ink font-medium text-lg font-bold">
                     {rating.clientName}
                   </h6>
                   <p className="text-sm text-[#999999]">
@@ -85,17 +85,17 @@ export const RatingCarousal = () => {
         <div className="w-full flex justify-center">
           <button
             onClick={goToPreviousSlide}
-            className="text-white bg-gray-800 hover:bg-gray-700 p-2 rounded-full md:ml-[35%] ml-[25%] swiper-button-prev"
+            className="text-ink bg-gray-800 hover:bg-gray-700 p-2 rounded-full md:ml-[35%] ml-[25%] swiper-button-prev"
           >
             <ArrowLeftIcon className="w-6 h-6" />
           </button>
-          <span className="text-white">
+          <span className="text-ink">
             <span className="text-success">{currentIndex + 1}</span>/
             {testimonials.length - 1}
           </span>
           <button
             onClick={goToNextSlide}
-            className="text-white bg-gray-800 hover:bg-gray-700 p-2 rounded-full md:mr-[35%] mr-[25%] swiper-button-next"
+            className="text-ink bg-gray-800 hover:bg-gray-700 p-2 rounded-full md:mr-[35%] mr-[25%] swiper-button-next"
           >
             <ArrowRightIcon className="w-6 h-6" />
           </button>
